@@ -6,6 +6,8 @@ import { ConfigModule } from './config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
+import { BagsModule } from './bags/bags.module';
+import { VarientModule } from './varient/varient.module';
 
 @Module({
   imports: [
@@ -15,13 +17,15 @@ import { CommonModule } from './common/common.module';
       port: 5432,
       username: 'postgres',
       password: '2001',
-      database: 'BagSell',
+      database: 'bagSell',
       entities: [User],
       synchronize: true,
     }),
     UsersModule,
     ConfigModule,
     CommonModule,
+    BagsModule,
+    VarientModule,
   ],
   controllers: [AppController],
   providers: [AppService],

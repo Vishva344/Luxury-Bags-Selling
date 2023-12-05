@@ -4,7 +4,7 @@ import pino from 'pino';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-  private readonly logger = pino(); // Create an instance of Pino logger
+  private readonly logger = pino();
 
   use(req: Request, res: Response, next: NextFunction): void {
     const { ip, method, originalUrl } = req;
