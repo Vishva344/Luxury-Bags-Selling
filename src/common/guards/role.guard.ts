@@ -1,9 +1,4 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from '../decorators/role.decorator';
 import { RequestWithPayload } from '../types/jwt-payload.type';
@@ -26,10 +21,7 @@ export class RoleGuard implements CanActivate {
    * @returns
    */
   canActivate(context: ExecutionContext): boolean {
-    const requiredRoles = this.reflector.get<string[]>(
-      ROLES_KEY,
-      context.getHandler(),
-    );
+    const requiredRoles = this.reflector.get<string[]>(ROLES_KEY, context.getHandler());
     if (!requiredRoles) return true;
 
     console.log(
@@ -40,8 +32,7 @@ export class RoleGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest<RequestWithPayload>();
     const user = request.user;
-    if (!requiredRoles.includes(user.role))
-      throw new UnauthorizedException(errorMessages.PERMISSION_DENIED);
+    if (!requiredRoles.includes(user.role)) throw new UnauthorizedException(errorMessages.PERMISSION_DENIED);
 
     return true;
   }

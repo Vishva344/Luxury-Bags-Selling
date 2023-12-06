@@ -3,7 +3,7 @@ import { Role } from './common.type';
 export interface JwtPayload {
   id: number;
   email: string;
-  role: Role;
+  // role: Role;
   p: string;
 }
 

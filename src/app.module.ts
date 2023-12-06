@@ -2,15 +2,21 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { ConfigModule } from './config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
 import { BagsModule } from './bags/bags.module';
-import { VarientModule } from './varient/varient.module';
+import { VariantModule } from './variant/variant.module';
+import { AuthModule } from './auth/auth.module';
+import { getEnvFile } from './config/env.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: getEnvFile(),
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -22,10 +28,10 @@ import { VarientModule } from './varient/varient.module';
       synchronize: true,
     }),
     UsersModule,
-    ConfigModule,
     CommonModule,
     BagsModule,
-    VarientModule,
+    VariantModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { usersTable } from './types/users.type';
+import { CommonResponsePromise } from '../common/types/common.type';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,8 +14,23 @@ export class UsersController {
     return this.usersService.createUser(createUserDto);
   }
 
-  @Post()
-  async updateUser(@Body() createUserDto: CreateUserDto): usersTable {
-    return this.usersService.updateUser(createUserDto);
+  @Post(':id')
+  async updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): CommonResponsePromise {
+    return this.usersService.updateUser(id, updateUserDto);
+  }
+
+  @Get('AllUser')
+  async getAllUser(): CommonResponsePromise {
+    return this.usersService.getAllUser();
+  }
+
+  @Get(':id')
+  async getUser(@Param('id') id: number): CommonResponsePromise {
+    return this.usersService.getUser(id);
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') id: number): CommonResponsePromise {
+    return this.usersService.deleteUser(id);
   }
 }

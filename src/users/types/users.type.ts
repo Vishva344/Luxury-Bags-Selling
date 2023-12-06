@@ -11,4 +11,10 @@ export interface UserDetailResponseData {
   IsDeactivate: boolean;
 }
 
+export interface UpdateData {
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+}
+
 export type usersTable = Promise<CommonResponse<UserDetailResponseData>>;
