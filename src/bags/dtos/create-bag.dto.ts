@@ -1,5 +1,5 @@
-import { IsArray, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { BagCategory } from '../types/bags.type';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
 
 export class CreateBagDto {
   @IsString()
@@ -15,16 +15,18 @@ export class CreateBagDto {
   bag_information: string;
 
   @IsString()
-  @IsNotEmpty()
-  bag_type: string;
+  @IsOptional()
+  @IsEnum(BagType)
+  bag_type?: BagType;
 
-  @IsNotEmpty()
   @IsEnum(BagCategory)
   bag_category: BagCategory;
 
-  @IsArray()
-  @IsString({ each: true })
-  offers?: [string];
+  @IsEnum(Gender)
+  gender: Gender;
+
+  @IsString()
+  offers: string;
 
   @IsString()
   @IsNotEmpty()

@@ -1,16 +1,10 @@
 import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
-export class Bags {
+export class Bag {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ length: 40 })
   bagName: string;
@@ -41,8 +35,8 @@ export class Bags {
   })
   gender: Gender;
 
-  @Column({ type: 'json', nullable: true })
-  offers: object[];
+  @Column()
+  offers: string;
 
   @Column({ length: 40 })
   bag_size: string;

@@ -26,9 +26,9 @@ export class AuthService {
 
     const payload: JwtPayload = {
       id: admin.id,
-      email: admin.email,
+      email: loginDto.email,
       p: loginDto.password,
-      // role: role,
+      role: admin.role,
     };
 
     return ResponseHandler.success(
@@ -38,6 +38,7 @@ export class AuthService {
         phoneNumber: admin.phoneNumber,
         password: admin.password,
         name: admin.name,
+        role: admin.role,
         token: this.jwtService.sign(payload),
       },
       'successfully login',

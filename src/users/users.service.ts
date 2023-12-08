@@ -1,13 +1,13 @@
 import { Injectable, HttpStatus, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateData, usersTable } from './types/users.type';
 import { ResponseHandler } from 'src/common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { User } from '../typeorm/user.entity';
 
 @Injectable()
 export class UsersService {

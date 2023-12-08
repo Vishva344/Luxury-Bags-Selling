@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { BagsService } from './bags.service';
 import { BagsController } from './bags.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Bags } from 'src/typeorm';
+import { Bag } from '../typeorm/bags.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Bags])],
+  imports: [TypeOrmModule.forFeature([Bag])],
   controllers: [BagsController],
   providers: [BagsService],
 })
