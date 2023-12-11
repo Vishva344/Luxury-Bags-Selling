@@ -1,25 +1,30 @@
 import { CommonResponse } from '../../common/types/common-response.type';
 
 export enum BagType {
-  Tote = 'Tote',
-  Backpack = 'Backpack',
-  Messenger = 'Messenger',
-  Clutch = 'Clutch',
-  Other = 'Other',
+  TOTE = 'Tote',
+  BACKPACK = 'Backpack',
+  MESSENGER = 'Messenger',
+  CLUTCH = 'Clutch',
+  OTHER = 'Other',
 }
 
 export enum BagCategory {
-  Leather = 'Leather',
-  Canvas = 'Canvas',
-  Travel = 'Travel',
-  Laptop = 'Laptop',
-  Other = 'Other',
+  LEATHER = 'Leather',
+  CANVAS = 'Canvas',
+  TRAVEL = 'Travel',
+  LAPTOP = 'Laptop',
+  OTHER = 'Other',
 }
 
 export enum Gender {
-  Women = 'women',
-  Men = 'men',
-  Kids = 'kids',
+  WOMEN = 'women',
+  MEN = 'men',
+  KIDS = 'kids',
+}
+
+export interface DataType {
+  id: number;
+  offer: string;
 }
 
 export interface BagDetailResponseData {
@@ -29,8 +34,8 @@ export interface BagDetailResponseData {
   bag_type?: string;
   bag_category: string;
   gender: string;
-  offers: string;
+  offers?: DataType[];
   bag_size: string;
 }
 
-export type bagTable = Promise<CommonResponse<BagDetailResponseData>>;
+export type BagTable = Promise<CommonResponse<BagDetailResponseData>>;

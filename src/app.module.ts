@@ -11,6 +11,7 @@ import { getEnvFile } from './config/env.config';
 import { ConfigModule } from '@nestjs/config';
 import { SeedsService } from './seeds/seed.service';
 import { User } from './typeorm/user.entity';
+import { FavoriteModule } from './favorite/favorite.module';
 import entities from './typeorm';
 
 @Module({
@@ -36,6 +37,7 @@ import entities from './typeorm';
     BagsModule,
     VariantModule,
     AuthModule,
+    FavoriteModule,
   ],
   controllers: [AppController],
   providers: [AppService, SeedsService],

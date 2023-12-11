@@ -1,14 +1,26 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Bag } from './bags.entity';
 
-@Entity()
+@Entity({})
 export class Variant {
   @PrimaryGeneratedColumn()
   id: number;
 
   @ManyToOne(() => Bag)
   @JoinColumn({ name: 'bag_id', referencedColumnName: 'id' })
-  bag: Bag;
+  bag_id: number;
+
+  // @ManyToOne(() => Bag)
+  // @JoinColumn({ name: 'bag_id' })
+  // bag_id: Bag;
 
   @Column()
   stock: string;
@@ -17,9 +29,9 @@ export class Variant {
   color: string;
 
   @Column()
-  Price: string;
+  price: string;
 
-  @Column()
+  @Column({ type: 'varchar', nullable: true })
   bag_image: string;
 
   @Column()
@@ -27,4 +39,14 @@ export class Variant {
 
   @Column()
   IsAvailable: boolean;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
 }

@@ -4,13 +4,13 @@ import { Repository } from 'typeorm';
 import { Bag } from '../typeorm/bags.entity';
 import { CreateBagDto } from './dtos/create-bag.dto';
 import { ResponseHandler } from '../common/response-handler';
-import { bagTable } from './types/bags.type';
+import { BagTable } from './types/bags.type';
 
 @Injectable()
 export class BagsService {
   constructor(@InjectRepository(Bag) private readonly bagRepository: Repository<Bag>) {}
 
-  async createBag(createBagDto: CreateBagDto): bagTable {
+  async createBag(createBagDto: CreateBagDto): BagTable {
     const bag = this.bagRepository.create({
       bagName: createBagDto.bagName,
       brandName: createBagDto.brandName,
@@ -18,10 +18,9 @@ export class BagsService {
       bag_type: createBagDto.bag_type,
       bag_category: createBagDto.bag_category,
       gender: createBagDto.gender,
-      offers: createBagDto.offers,
+      offers: createBagDto.offers ?? [],
       bag_size: createBagDto.bag_size,
     });
-    console.log('🚀 ~ file: bags.service.ts:14 ~ BagsService ~ createBag ~ createBag:', bag);
     await this.bagRepository.save(bag);
 
     return ResponseHandler.success(bag, 'bag added successfully', HttpStatus.OK);

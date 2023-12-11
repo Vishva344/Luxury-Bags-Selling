@@ -1,4 +1,5 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
 
 export class CreateBagDto {
@@ -25,10 +26,30 @@ export class CreateBagDto {
   @IsEnum(Gender)
   gender: Gender;
 
-  @IsString()
-  offers: string;
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => DataType)
+  offers?: DataType[];
 
   @IsString()
   @IsNotEmpty()
   bag_size: string;
 }
+
+class DataType {
+  @IsNumber()
+  id: number;
+
+  @IsString()
+  @IsNotEmpty()
+  offer: string;
+}
+
+// export class OffersDto {
+//   @IsOptional()
+//   @IsArray()
+//   @ValidateNested({ each: true })
+//   @Type(() => DataType)
+//   offers?: DataType[];
+// }

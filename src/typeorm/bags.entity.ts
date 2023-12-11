@@ -1,44 +1,45 @@
-import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
+import { BagCategory, BagType, DataType, Gender } from 'src/bags/types/bags.type';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity()
+@Entity({})
 export class Bag {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
-  @Column({ length: 40 })
+  @Column({ length: 40, nullable: true })
   bagName: string;
 
-  @Column({ length: 40 })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   brandName: string;
 
-  @Column({ length: 40 })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   bag_information: string;
 
   @Column({
     type: 'enum',
     enum: BagType,
-    default: BagType.Other,
+    default: BagType.OTHER,
   })
   bag_type: BagType;
 
   @Column({
     type: 'enum',
     enum: BagCategory,
-    default: BagCategory.Other,
+    default: BagCategory.OTHER,
   })
   bag_category: BagCategory;
 
   @Column({
     type: 'enum',
     enum: Gender,
+    default: Gender.KIDS,
   })
   gender: Gender;
 
-  @Column()
-  offers: string;
+  @Column({ type: 'json', nullable: true })
+  offers: DataType[];
 
-  @Column({ length: 40 })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   bag_size: string;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
