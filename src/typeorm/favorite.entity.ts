@@ -7,20 +7,20 @@ export class Favorite {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'buyer_id' })
-  buyer_id: number;
+  @ManyToOne(() => User, (user) => user.favorites, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user: User;
 
-  @ManyToOne(() => Bag, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'bag_id' })
-  bag_id: number;
+  @ManyToOne(() => Bag, (bag) => bag.favorites, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'bagId' })
+  bag: Bag;
 
-  @ManyToOne(() => Variant, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'variant_id' })
-  variant_id: number;
+  @ManyToOne(() => Variant, (variant) => variant.favorites, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'variantId' })
+  variant: Variant;
 
   @Column({
-    default: true,
+    default: false,
   })
   isFavorite: boolean;
 }

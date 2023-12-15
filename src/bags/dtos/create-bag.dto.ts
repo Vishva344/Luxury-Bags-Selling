@@ -1,4 +1,4 @@
-import { Transform, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
 
@@ -6,6 +6,10 @@ export class CreateBagDto {
   @IsString()
   @IsNotEmpty()
   bagName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 
   @IsString()
   @IsNotEmpty()

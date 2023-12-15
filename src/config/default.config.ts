@@ -8,6 +8,8 @@ import envConfig from './env.config';
 export const Defaults = {
   SUPER_ADMIN_EMAIL: 'vishva@gmail.com',
   SUPER_ADMIN_PASSWORD: 'admin@123',
+  PAGINATION_PAGE_SIZE: 1,
+  PAGINATION_LIMIT: 10,
 };
 
 export const s3 = new AWS.S3({

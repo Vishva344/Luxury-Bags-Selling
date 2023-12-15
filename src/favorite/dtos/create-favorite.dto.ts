@@ -3,15 +3,15 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateFavoriteDto {
   @IsNumber()
   @IsNotEmpty()
-  bag_id: number;
+  bagId: number;
 
   @IsNumber()
   @IsNotEmpty()
-  buyer_id: number;
+  userId: number;
 
   @IsNumber()
   @IsNotEmpty()
-  variant_id: number;
+  variantId: number;
 
   @IsString()
   @IsNotEmpty()

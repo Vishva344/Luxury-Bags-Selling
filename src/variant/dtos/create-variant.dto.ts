@@ -3,7 +3,7 @@ import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateVariantDto {
   @IsNumber()
   @IsNotEmpty()
-  bag_id: number;
+  bagId: number;
 
   @IsString()
   @IsNotEmpty()
@@ -19,7 +19,7 @@ export class CreateVariantDto {
 
   @IsArray()
   @IsNotEmpty()
-  bag_image: string;
+  bag_image: string[];
 
   @IsString()
   @IsNotEmpty()

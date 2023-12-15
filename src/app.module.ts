@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
@@ -12,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SeedsService } from './seeds/seed.service';
 import { User } from './typeorm/user.entity';
 import { FavoriteModule } from './favorite/favorite.module';
-import entities from './typeorm';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -28,7 +26,7 @@ import entities from './typeorm';
       username: 'postgres',
       password: '2001',
       database: 'bagSell',
-      entities: entities,
+      autoLoadEntities: true,
       synchronize: true,
     }),
 
@@ -38,8 +36,9 @@ import entities from './typeorm';
     VariantModule,
     AuthModule,
     FavoriteModule,
+    CartModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, SeedsService],
+  controllers: [],
+  providers: [SeedsService],
 })
 export class AppModule {}

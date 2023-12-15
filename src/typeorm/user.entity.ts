@@ -1,5 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Role } from '../common/types/common.type';
+import { Bag } from './bags.entity';
+import { Favorite } from './favorite.entity';
+import { Cart } from './cart.entity';
 
 @Entity()
 export class User {
@@ -18,7 +21,6 @@ export class User {
   @Column({
     type: 'enum',
     enum: Role,
-    default: Role.USER,
   })
   role: Role;
 
@@ -27,6 +29,15 @@ export class User {
 
   @Column()
   IsDeactivate: boolean;
+
+  @OneToMany(() => Bag, (bag) => bag.user)
+  bags: Bag[];
+
+  @OneToMany(() => Favorite, (favorite) => favorite.user)
+  favorites: Favorite[];
+
+  @OneToMany(() => Cart, (cart) => cart.user)
+  carts: Cart[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, isEnum } from 'class-validator';
 import { Role } from '../../common/types/common.type';
 
 export class CreateUserDto {
@@ -18,10 +18,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   phoneNumber: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsOptional()
-  @IsEnum(Role)
-  role: string;
+  role: Role;
 
   @IsString()
   @IsNotEmpty()

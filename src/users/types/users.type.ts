@@ -9,6 +9,7 @@ export interface UserDetailResponseData {
   password: string;
   phoneNumber: string;
   IsDeactivate: boolean;
+  role: string;
 }
 
 export interface UpdateData {
@@ -17,4 +18,9 @@ export interface UpdateData {
   phoneNumber?: string;
 }
 
-export type usersTable = Promise<CommonResponse<UserDetailResponseData>>;
+export enum SortFields {
+  NAME = 'name',
+  EMAIL = 'email',
+}
+
+export type UsersTable = Promise<CommonResponse<UserDetailResponseData>>;

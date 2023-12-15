@@ -16,20 +16,20 @@ export class FavoriteService {
   ) {}
 
   async createFavorite(createFavoriteDto: CreateFavoriteDto): Promise<any> {
-    const bag = await this.bagRepository.findOne({ where: { id: createFavoriteDto.bag_id } });
+    const bag = await this.bagRepository.findOne({ where: { id: createFavoriteDto.bagId } });
     if (!bag) throw new NotFoundException('bag is not found');
 
-    const user = await this.userRepository.findOne({ where: { id: createFavoriteDto.buyer_id } });
+    const user = await this.userRepository.findOne({ where: { id: createFavoriteDto.userId } });
     if (!user) throw new NotFoundException('user is not found');
 
-    const variant = await this.variantRepository.findOne({ where: { id: createFavoriteDto.variant_id } });
+    const variant = await this.variantRepository.findOne({ where: { id: createFavoriteDto.variantId } });
     if (!variant) throw new NotFoundException('variant is not found');
-    const newFav = this.favoriteRepository.create({
-      buyer_id: createFavoriteDto.buyer_id,
-      bag_id: createFavoriteDto.bag_id,
-      variant_id: createFavoriteDto.variant_id,
+    const newFav = {
+      userId: createFavoriteDto.userId,
+      bagId: createFavoriteDto.bagId,
+      variantId: createFavoriteDto.variantId,
       isFavorite: createFavoriteDto.isFavorite,
-    });
+    };
     await this.favoriteRepository.save(newFav);
     return ResponseHandler.success(newFav, 'bag added successfully', HttpStatus.OK);
   }

@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { UpdateData, usersTable } from './types/users.type';
+import { UpdateData, UsersTable } from './types/users.type';
 import { ResponseHandler } from 'src/common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -13,29 +13,21 @@ import { User } from '../typeorm/user.entity';
 export class UsersService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
-  async hashPassword(password: string): Promise<string> {
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    return hashedPassword;
-  }
-
-  async createUser(createUserDto: CreateUserDto): usersTable {
-    const user = this.userRepository.create({
-      name: createUserDto.name,
+  async createUser(createUserDto: CreateUserDto): UsersTable {
+    const user: CreateUserDto = {
+      ...createUserDto,
+      password: await bcrypt.hash(createUserDto.password, 10),
       email: createUserDto.email.trim(),
-      password: await this.hashPassword(createUserDto.password),
-      phoneNumber: createUserDto.phoneNumber,
-      IsDeactivate: createUserDto.IsDeactivate,
-    });
-
+    };
     await this.userRepository.save(user);
 
     return ResponseHandler.success(user, 'User created successfully', HttpStatus.OK);
   }
 
-  async updateUser(id: number, updateUserDto: UpdateUserDto): CommonResponsePromise {
-    const userDetails = await this.userRepository.findOne({ where: { id } });
+  async updateUser(user: User, id: string, updateUserDto: UpdateUserDto): CommonResponsePromise {
+    const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
 
+    if (user.id !== parseInt(id)) throw new NotFoundException('un authorized **');
     if (!userDetails) throw new NotFoundException('not found');
 
     const updateData: UpdateData = {
@@ -46,20 +38,20 @@ export class UsersService {
 
     await this.userRepository.update(id, updateData);
 
-    return ResponseHandler.success({}, 'User updated successfully', HttpStatus.OK);
+    return ResponseHandler.success(updateData, 'User updated successfully', HttpStatus.OK);
   }
 
-  async getAllUser(): CommonResponsePromise {
+  async getAllUser(user: User): CommonResponsePromise {
     const users = await this.userRepository.find();
     return ResponseHandler.success({ users }, 'All user List', HttpStatus.OK);
   }
 
-  async getUser(id: number): CommonResponsePromise {
+  async getUser(user: User, id: number): CommonResponsePromise {
     const userData = await this.userRepository.findOne({ where: { id } });
     return ResponseHandler.success({ userData }, 'get user successfully', HttpStatus.OK);
   }
 
-  async deleteUser(id: number): CommonResponsePromise {
+  async deleteUser(user: User, id: number): CommonResponsePromise {
     const userToDelete = await this.userRepository.findOne({ where: { id } });
     if (!userToDelete) throw new NotFoundException('not found');
 

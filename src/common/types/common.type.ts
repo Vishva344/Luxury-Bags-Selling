@@ -5,9 +5,19 @@ import { CommonResponse } from './common-response.type';
  */
 export enum Role {
   ADMIN = 'admin',
-  USER = 'user',
   SELLER = 'seller',
   BUYER = 'buyer',
+  USER = 'user',
+}
+
+export enum User {
+  SELLER = 'seller',
+  BUYER = 'buyer',
+}
+
+export enum SortBy {
+  ASE = 'asc',
+  DEC = 'desc',
 }
 
 /**
@@ -23,7 +33,7 @@ export interface CommonFile {
   contentDisposition: null;
   storageClass: string;
   serverSideEncryption: null;
-  metadata: [object];
+  metadata: object[];
   location: string;
   etag: string;
   fieldname: string;

@@ -28,6 +28,7 @@ export interface DataType {
 }
 
 export interface BagDetailResponseData {
+  userId: number;
   bagName: string;
   brandName: string;
   bag_information: string;
