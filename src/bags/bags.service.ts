@@ -19,12 +19,12 @@ export class BagsService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async createBag(user: User, createBagDto: CreateBagDto): BagTable {
+  async createBag(user: User, createBagDto: CreateBagDto): CommonResponsePromise {
     const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
     if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
 
     const bag = {
-      userId: user.id,
+      user: user,
       bagName: createBagDto.bagName,
       brandName: createBagDto.brandName,
       bag_information: createBagDto.bag_information,
@@ -91,17 +91,19 @@ export class BagsService {
     const skip = (page - 1) * limit;
     const sortValue = query.sortValue || 'updatedAt';
     const sortBy = query.sortBy === 'asc' ? 'ASC' : 'DESC';
-    const searchText = query.searchText;
 
-    const queryBuilder = this.bagRepository
+    const searchText = query.searchText !== undefined && query.searchText !== null ? `%${query.searchText}%` : '%';
+
+    const [bags, totalBagsCount] = await this.bagRepository
       .createQueryBuilder('bag')
-      .where('bag.brandName LIKE :searchText OR bag.bagName LIKE :searchText', { searchText: `%${searchText}%` })
       .orderBy(`bag.${sortValue}`, sortBy)
+      .where('bag.brandName LIKE :searchText OR bag.bagName LIKE :searchText', { searchText })
       .skip(skip)
-      .take(limit);
+      .take(limit)
+      .getManyAndCount();
 
-    const exhibitions = await queryBuilder.getMany();
+    const totalPages = Math.ceil(totalBagsCount / limit);
 
-    return ResponseHandler.success(exhibitions, 'Exhibitions fetched successfully', HttpStatus.OK);
+    return ResponseHandler.success({ bags, totalPages }, 'bags fetched successfully with total pages', HttpStatus.OK);
   }
 }

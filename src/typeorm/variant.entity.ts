@@ -21,7 +21,7 @@ export class Variant {
   // @JoinColumn({ name: 'bagId', referencedColumnName: 'id' })
   // bag_id: number;
 
-  @ManyToOne(() => Bag, (bag) => bag.variants)
+  @ManyToOne(() => Bag, (bag) => bag.variants, { nullable: false })
   @JoinColumn({ name: 'bagId' })
   bag: Bag;
 

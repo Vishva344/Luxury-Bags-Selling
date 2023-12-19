@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateVariantData, VariantTable } from './types/variant.type';
@@ -8,6 +8,8 @@ import { CommonFile, CommonResponsePromise } from '../common/types/common.type';
 import { Bag, User, Variant } from '../typeorm';
 import { UpdateVariantDto } from './dtos/update-variant.dto';
 import { errorMessages } from '../config/messages.config';
+import { GetAllVariantDto } from './dtos/get-variant.dto';
+import { Defaults } from '../config/default.config';
 
 @Injectable()
 export class VariantService {
@@ -17,7 +19,7 @@ export class VariantService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async createVariant(user: User, createVariantDto: CreateVariantDto, file: CommonFile[]): VariantTable {
+  async createVariant(user: User, createVariantDto: CreateVariantDto, file: CommonFile[]): CommonResponsePromise {
     const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
     if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
 
@@ -31,12 +33,12 @@ export class VariantService {
     }
 
     const variantData = {
-      bagId: bag.id,
+      bag: bag,
       bag_image: bagImages,
       stock: createVariantDto.stock,
       color: createVariantDto.color,
       price: createVariantDto.price,
-      IsAvailable: createVariantDto.IsAvailable,
+      IsAvailable: true,
       condition: createVariantDto.condition,
     };
 
@@ -79,7 +81,61 @@ export class VariantService {
     return ResponseHandler.success({ updatedVariant }, 'Variant updated successfully', HttpStatus.OK);
   }
 
-  async getVariant(): Promise<void> {
-    await this.variantRepository.find();
+  async getVariant(user: User, variantId: number): CommonResponsePromise {
+    const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
+    if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
+
+    const variant = await this.variantRepository
+      .createQueryBuilder('variant')
+      .innerJoin('variant.bag', 'bag')
+      .addSelect(['bag.id'])
+      .where('variant.id = :variantId AND variant.bagId = bag.id', { variantId })
+      .getOne();
+
+    if (!variant) {
+      throw new NotFoundException('Variant not found');
+    }
+
+    return ResponseHandler.success(variant, 'Variant retrieved successfully', HttpStatus.OK);
+  }
+
+  async getAllVariant(user: User, bagId: number, query: GetAllVariantDto): CommonResponsePromise {
+    const userDetails = await this.userRepository.findOne({
+      where: { id: user.id },
+    });
+
+    if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
+
+    const page = query.page || Defaults.PAGINATION_PAGE_SIZE;
+    const limit = query.limit || Defaults.PAGINATION_LIMIT;
+    const skip = (page - 1) * limit;
+    const sortValue = query.sortValue || 'updatedAt';
+    const sortBy = query.sortBy === 'asc' ? 'ASC' : 'DESC';
+    const searchText = `%${query.searchText || ''}%`;
+
+    const [result, totalVariantsCount] = await this.bagRepository
+
+      .createQueryBuilder('bag')
+      .innerJoinAndSelect('bag.variants', 'variant')
+      .where('bag.id = :bagId', { bagId })
+      .andWhere(`(variant.price LIKE :searchText OR variant.color LIKE :searchText)`, { searchText: `%${searchText}%` })
+      .orderBy(`variant.${sortValue}`, sortBy)
+      .skip(skip)
+      .take(limit)
+      .getManyAndCount();
+
+    const totalPages = Math.ceil(totalVariantsCount / limit);
+    if (!result) {
+      throw new NotFoundException(errorMessages.NO_VARIANTS_FOUND);
+    }
+
+    return ResponseHandler.success({ result, totalPages }, 'Variants retrieved successfully', HttpStatus.OK);
+  }
+
+  async deleteVariant(user: User, variantId: number): CommonResponsePromise {
+    const variantData = await this.variantRepository.delete({ id: variantId });
+    if (!variantData.affected) throw new BadRequestException(errorMessages.VARIANT_NOT_DELETED);
+
+    return ResponseHandler.success({}, 'delete variant successfully', HttpStatus.OK);
   }
 }

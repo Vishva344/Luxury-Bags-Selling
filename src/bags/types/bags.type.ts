@@ -1,4 +1,5 @@
 import { CommonResponse } from '../../common/types/common-response.type';
+import { Bag } from '../../typeorm';
 
 export enum BagType {
   TOTE = 'Tote',
@@ -39,4 +40,9 @@ export interface BagDetailResponseData {
   bag_size: string;
 }
 
-export type BagTable = Promise<CommonResponse<BagDetailResponseData>>;
+export enum SortFields {
+  NAME = 'bagName',
+  EMAIL = 'brandName',
+}
+
+export type BagTable = Promise<CommonResponse<Bag>>;

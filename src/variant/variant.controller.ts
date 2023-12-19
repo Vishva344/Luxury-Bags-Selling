@@ -3,11 +3,14 @@ import {
   Get,
   Controller,
   Param,
+  Query,
   ParseFilePipeBuilder,
   Post,
   UploadedFiles,
   UseInterceptors,
   UseGuards,
+  Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { VariantService } from './variant.service';
 import { CreateVariantDto } from './dtos/create-variant.dto';
@@ -19,6 +22,8 @@ import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RoleGuard } from '../common/guards/role.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
 import { User } from '../typeorm';
+import { query } from 'express';
+import { GetAllVariantDto } from './dtos/get-variant.dto';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('variant')
@@ -31,7 +36,7 @@ export class VariantController {
     @RequestUser() user: User,
     @Body() createVariantDto: CreateVariantDto,
     @UploadedFiles(new ParseFilePipeBuilder().build({ fileIsRequired: false })) file: CommonFile[],
-  ): VariantTable {
+  ): CommonResponsePromise {
     return this.variantService.createVariant(user, createVariantDto, file);
   }
 
@@ -47,8 +52,22 @@ export class VariantController {
     return this.variantService.updateVariant(user, variantId, updateVariantDto, file);
   }
 
-  @Get()
-  async getVariant(): Promise<void> {
-    return this.variantService.getVariant();
+  @Get(':variantId')
+  async getVariant(@RequestUser() user: User, @Param('variantId') variantId: number): CommonResponsePromise {
+    return this.variantService.getVariant(user, variantId);
+  }
+
+  @Get('bag/:bagId')
+  async getAllVariant(
+    @RequestUser() user: User,
+    @Param('bagId') bagId: number,
+    @Query() query: GetAllVariantDto,
+  ): CommonResponsePromise {
+    return this.variantService.getAllVariant(user, bagId, query);
+  }
+
+  @Delete(':id')
+  async deleteVariant(@RequestUser() user: User, @Param('id', ParseIntPipe) variantId: number): CommonResponsePromise {
+    return this.variantService.deleteVariant(user, variantId);
   }
 }

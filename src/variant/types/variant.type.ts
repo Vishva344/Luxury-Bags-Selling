@@ -20,5 +20,10 @@ export interface UpdateVariantData {
   bagId?: number;
 }
 
+export enum SortFields {
+  PRICE = 'Price',
+  CREATEDAT = 'createdAt',
+}
+
 export type VariantTable = Promise<CommonResponse<VariantDetailResponseData>>;
 export type UpdateVariantTable = Promise<CommonResponse<UpdateVariantData>>;
