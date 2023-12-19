@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateFavoriteDto {
   @IsNumber()
@@ -13,7 +13,7 @@ export class CreateFavoriteDto {
   @IsNotEmpty()
   variantId: number;
 
-  @IsString()
-  @IsNotEmpty()
-  isFavorite: boolean;
+  // @IsString()
+  // @IsNotEmpty()
+  // isDeleted: boolean;
 }

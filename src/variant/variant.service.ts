@@ -82,9 +82,6 @@ export class VariantService {
   }
 
   async getVariant(user: User, variantId: number): CommonResponsePromise {
-    const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
-    if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
-
     const variant = await this.variantRepository
       .createQueryBuilder('variant')
       .innerJoin('variant.bag', 'bag')
@@ -126,7 +123,7 @@ export class VariantService {
 
     const totalPages = Math.ceil(totalVariantsCount / limit);
     if (!result) {
-      throw new NotFoundException(errorMessages.NO_VARIANTS_FOUND);
+      throw new NotFoundException(errorMessages.NO_VARIANT_FOUND);
     }
 
     return ResponseHandler.success({ result, totalPages }, 'Variants retrieved successfully', HttpStatus.OK);

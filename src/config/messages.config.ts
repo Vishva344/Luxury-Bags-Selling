@@ -6,7 +6,10 @@ export const errorMessages = {
   USER_NOT_FOUND: 'User not found.',
   BAG_NOT_FOUND: 'Bag not found.',
   VARIANT_NOT_DELETED: 'variant not deleted.',
-  NO_VARIANTS_FOUND: 'Variant not found.',
+  NO_VARIANT_FOUND: 'Variant not found.',
+  NO_FAVORITE_FOUND: 'favorite not found.',
+  FAVORITE_NOT_DELETED: 'favorite not deleted.',
+  CART_NOT_DELETED: 'cart not deleted.',
 };
 
 /**

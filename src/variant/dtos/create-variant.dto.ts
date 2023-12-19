@@ -9,13 +9,13 @@ export class CreateVariantDto {
   @IsNotEmpty()
   stock: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   color: string;
 
   @IsString()
   @IsNotEmpty()
-  price: string;
+  price: number;
 
   @IsArray()
   @IsNotEmpty()

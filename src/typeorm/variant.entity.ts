@@ -32,7 +32,7 @@ export class Variant {
   color: string;
 
   @Column()
-  price: string;
+  price: number;
 
   @Column({ type: 'json', nullable: true })
   bag_image: string[];

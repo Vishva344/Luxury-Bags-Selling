@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -28,11 +29,11 @@ export class Cart {
   @JoinColumn({ name: 'variantId' })
   variant: Variant;
 
-  @Column()
-  price: string;
+  @Column({ nullable: false })
+  price: number;
 
-  //   @Column()
-  //   total_cart_value: number;
+  @Column({ nullable: true })
+  quantity: number;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -43,4 +44,7 @@ export class Cart {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp' })
+  deletedDate: Date;
 }

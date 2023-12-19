@@ -4,7 +4,7 @@ export interface VariantDetailResponseData {
   bagId: number;
   stock: string;
   color: string;
-  price: string;
+  price: number;
   bag_image: string[];
   condition?: string;
   IsAvailable: boolean;
@@ -14,7 +14,7 @@ export interface UpdateVariantData {
   bag_image?: string[];
   stock?: string;
   color?: string;
-  price?: string;
+  price: number;
   IsAvailable?: boolean;
   condition?: string;
   bagId?: number;
