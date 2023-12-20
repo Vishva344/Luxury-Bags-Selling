@@ -8,7 +8,8 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Bag, Variant } from '.';
+import { Bag } from './bags.entity';
+import { Variant } from './variant.entity';
 
 @Entity()
 export class Favorite {

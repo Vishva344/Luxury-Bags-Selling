@@ -11,6 +11,7 @@ import { SeedsService } from './seeds/seed.service';
 import { User } from './typeorm/user.entity';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CartModule } from './cart/cart.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CartModule } from './cart/cart.module';
     AuthModule,
     FavoriteModule,
     CartModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [SeedsService],

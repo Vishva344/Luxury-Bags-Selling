@@ -2,11 +2,11 @@
 import { Injectable } from '@nestjs/common';
 // import bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../typeorm';
 import { Repository } from 'typeorm';
 import { Defaults } from '../config/default.config';
 import { Role } from '../common/types/common.type';
 import { hash } from 'bcrypt';
+import { User } from '../typeorm/user.entity';
 // import { Admin, AdminDocument } from '../admin/schemas/admin.schema';
 
 @Injectable()

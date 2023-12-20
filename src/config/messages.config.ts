@@ -10,6 +10,7 @@ export const errorMessages = {
   NO_FAVORITE_FOUND: 'favorite not found.',
   FAVORITE_NOT_DELETED: 'favorite not deleted.',
   CART_NOT_DELETED: 'cart not deleted.',
+  NO_CART_FOUND: 'Cart not found.',
 };
 
 /**

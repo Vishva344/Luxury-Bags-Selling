@@ -1,6 +1,5 @@
 import { HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../typeorm';
 import { Repository } from 'typeorm';
 import { LoginDto } from './dtos/login.dto';
 import { LoginResponse } from './types/auth.types';
@@ -8,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtPayload } from '../common/types/jwt-payload.type';
 import { ResponseHandler } from '../common/response-handler';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '../typeorm/user.entity';
 
 @Injectable()
 export class AuthService {

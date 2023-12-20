@@ -1,11 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { JwtPayload } from '../types/jwt-payload.type';
 import { Repository } from 'typeorm';
-import { User } from '../../typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { errorMessages } from '../../config/messages.config';
+import { User } from '../../typeorm/user.entity';
 
 /**
  * Description - Request Verify Guard
@@ -44,6 +45,10 @@ export class RequestVerify implements CanActivate {
     if (user.role !== payload.role) {
       throw new UnauthorizedException('unAuthorized');
     }
+
+    const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
+    if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
+
     request['user'] = payload;
     return true;
   }

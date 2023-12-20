@@ -4,10 +4,10 @@ import { BagTable } from './types/bags.type';
 import { CreateBagDto } from './dtos/create-bag.dto';
 import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
-import { User } from '../typeorm';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateBagDto } from './dtos/update-bag.dto';
 import { GetAllBagDto } from './dtos/get-bag.dto';
+import { User } from '../typeorm/user.entity';
 
 @UseGuards(RequestVerify)
 @Controller('bags')

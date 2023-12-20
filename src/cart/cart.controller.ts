@@ -3,9 +3,10 @@ import { CartService } from './cart.service';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { RequestUser } from '../common/decorators/request-user.decorator';
 import { RequestVerify } from '../common/guards/request-verify.guard';
-import { User } from '../typeorm';
+
 import { CreateAddToCartDto } from './dtos/create-cart.dto';
 import { RoleGuard } from '../common/guards/role.guard';
+import { User } from '../typeorm/user.entity';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('cart')

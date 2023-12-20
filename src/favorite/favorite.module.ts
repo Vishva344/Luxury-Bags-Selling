@@ -3,8 +3,10 @@ import { FavoriteService } from './favorite.service';
 import { FavoriteController } from './favorite.controller';
 import { Favorite } from '../typeorm/favorite.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Bag, User, Variant } from '../typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { Variant } from '../typeorm/variant.entity';
+import { User } from '../typeorm/user.entity';
+import { Bag } from '../typeorm/bags.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Favorite, Variant, Bag, User])],

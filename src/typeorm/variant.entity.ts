@@ -11,6 +11,7 @@ import {
 import { Bag } from './bags.entity';
 import { Favorite } from './favorite.entity';
 import { Cart } from './cart.entity';
+import { Order } from './order.entity';
 
 @Entity()
 export class Variant {
@@ -48,6 +49,9 @@ export class Variant {
 
   @OneToMany(() => Cart, (cart) => cart.variant)
   carts: Cart[];
+
+  @OneToMany(() => Order, (order) => order.variant)
+  orders: Order[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

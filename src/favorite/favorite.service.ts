@@ -3,10 +3,12 @@ import { Favorite } from '../typeorm/favorite.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateFavoriteDto } from './dtos/create-favorite.dto';
-import { Bag, User, Variant } from '../typeorm';
 import { ResponseHandler } from '../common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { errorMessages } from '../config/messages.config';
+import { User } from '../typeorm/user.entity';
+import { Bag } from '../typeorm/bags.entity';
+import { Variant } from '../typeorm/variant.entity';
 
 @Injectable()
 export class FavoriteService {

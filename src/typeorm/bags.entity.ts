@@ -13,6 +13,7 @@ import { User } from './user.entity';
 import { Variant } from './variant.entity';
 import { Favorite } from './favorite.entity';
 import { Cart } from './cart.entity';
+import { Order } from './order.entity';
 
 @Entity()
 export class Bag {
@@ -67,6 +68,9 @@ export class Bag {
 
   @OneToMany(() => Cart, (cart) => cart.bag)
   carts: Cart[];
+
+  // @OneToMany(() => Order, (order) => order.bag)
+  // orders: Order[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -21,9 +21,8 @@ import { UpdateVariantDto } from './dtos/update-variant.dto';
 import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RoleGuard } from '../common/guards/role.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
-import { User } from '../typeorm';
-import { query } from 'express';
 import { GetAllVariantDto } from './dtos/get-variant.dto';
+import { User } from '../typeorm/user.entity';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('variant')

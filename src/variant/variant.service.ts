@@ -5,11 +5,14 @@ import { UpdateVariantData, VariantTable } from './types/variant.type';
 import { ResponseHandler } from '../common/response-handler';
 import { CreateVariantDto } from './dtos/create-variant.dto';
 import { CommonFile, CommonResponsePromise } from '../common/types/common.type';
-import { Bag, User, Variant } from '../typeorm';
+
 import { UpdateVariantDto } from './dtos/update-variant.dto';
 import { errorMessages } from '../config/messages.config';
 import { GetAllVariantDto } from './dtos/get-variant.dto';
 import { Defaults } from '../config/default.config';
+import { User } from '../typeorm/user.entity';
+import { Variant } from '../typeorm/variant.entity';
+import { Bag } from '../typeorm/bags.entity';
 
 @Injectable()
 export class VariantService {

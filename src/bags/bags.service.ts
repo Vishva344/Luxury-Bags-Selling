@@ -4,13 +4,12 @@ import { Repository } from 'typeorm';
 import { Bag } from '../typeorm/bags.entity';
 import { CreateBagDto } from './dtos/create-bag.dto';
 import { ResponseHandler } from '../common/response-handler';
-import { BagTable } from './types/bags.type';
-import { User } from '../typeorm';
 import { errorMessages } from '../config/messages.config';
 import { UpdateBagDto } from './dtos/update-bag.dto';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { GetAllBagDto } from './dtos/get-bag.dto';
 import { Defaults } from '../config/default.config';
+import { User } from '../typeorm/user.entity';
 
 @Injectable()
 export class BagsService {

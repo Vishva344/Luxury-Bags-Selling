@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { UpdateData, UsersTable } from './types/users.type';
+import { UpdateData, UsersTable } from './users.type';
 import { ResponseHandler } from 'src/common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateUserDto } from './dtos/update-user.dto';

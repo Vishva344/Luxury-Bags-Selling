@@ -3,8 +3,8 @@ import { BagsService } from './bags.service';
 import { BagsController } from './bags.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Bag } from '../typeorm/bags.entity';
-import { User } from '../typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '../typeorm/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Bag, User])],

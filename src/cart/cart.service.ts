@@ -1,11 +1,14 @@
 import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Bag, Cart, User, Variant } from '../typeorm';
 import { Repository } from 'typeorm';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { ResponseHandler } from '../common/response-handler';
 import { CreateAddToCartDto } from './dtos/create-cart.dto';
 import { errorMessages } from '../config/messages.config';
+import { Variant } from '../typeorm/variant.entity';
+import { Cart } from '../typeorm/cart.entity';
+import { User } from '../typeorm/user.entity';
+import { Bag } from '../typeorm/bags.entity';
 
 @Injectable()
 export class CartService {

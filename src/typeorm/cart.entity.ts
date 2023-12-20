@@ -5,12 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Bag } from './bags.entity';
 import { User } from './user.entity';
 import { Variant } from './variant.entity';
+import { Order } from './order.entity';
 
 @Entity()
 export class Cart {
@@ -28,6 +30,9 @@ export class Cart {
   @ManyToOne(() => Variant, (variant) => variant.carts, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'variantId' })
   variant: Variant;
+
+  @OneToMany(() => Order, (order) => order.cart)
+  orders: Order[];
 
   @Column({ nullable: false })
   price: number;
