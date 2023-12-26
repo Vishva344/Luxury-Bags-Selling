@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Bag } from '../typeorm/bags.entity';
+import { Bag } from './entities/bags.entity';
 import { CreateBagDto } from './dtos/create-bag.dto';
 import { ResponseHandler } from '../common/response-handler';
 import { errorMessages } from '../config/messages.config';
@@ -9,7 +9,7 @@ import { UpdateBagDto } from './dtos/update-bag.dto';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { GetAllBagDto } from './dtos/get-bag.dto';
 import { Defaults } from '../config/default.config';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class BagsService {
@@ -82,9 +82,6 @@ export class BagsService {
   }
 
   async getAllBag(user: User, query: GetAllBagDto): CommonResponsePromise {
-    const userDetails = await this.userRepository.findOne({ where: { id: user.id } });
-    if (!userDetails) throw new NotFoundException(errorMessages.USER_NOT_FOUND);
-
     const page = query.page || Defaults.PAGINATION_PAGE_SIZE;
     const limit = query.limit || Defaults.PAGINATION_LIMIT;
     const skip = (page - 1) * limit;

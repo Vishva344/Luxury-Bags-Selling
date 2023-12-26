@@ -1,14 +1,14 @@
 import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { Favorite } from '../typeorm/favorite.entity';
+import { Favorite } from './entities/favorite.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateFavoriteDto } from './dtos/create-favorite.dto';
 import { ResponseHandler } from '../common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { errorMessages } from '../config/messages.config';
-import { User } from '../typeorm/user.entity';
-import { Bag } from '../typeorm/bags.entity';
-import { Variant } from '../typeorm/variant.entity';
+import { User } from '../users/entities/user.entity';
+import { Bag } from '../bags/entities/bags.entity';
+import { Variant } from '../variant/entities/variant.entity';
 
 @Injectable()
 export class FavoriteService {

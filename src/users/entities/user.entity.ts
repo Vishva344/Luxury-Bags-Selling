@@ -1,9 +1,18 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Role } from '../common/types/common.type';
-import { Bag } from './bags.entity';
-import { Favorite } from './favorite.entity';
-import { Cart } from './cart.entity';
-import { Order } from './order.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Role } from '../../common/types/common.type';
+import { Bag } from '../../bags/entities/bags.entity';
+import { Cart } from '../../cart/entities/cart.entity';
+
+import { Order } from '../../order/entities/order.entity';
+import { Favorite } from '../../favorite/entities/favorite.entity';
 
 @Entity()
 export class User {
@@ -52,4 +61,7 @@ export class User {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp' })
+  deletedDate: Date;
 }

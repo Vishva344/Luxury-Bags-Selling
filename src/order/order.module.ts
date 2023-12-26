@@ -3,10 +3,10 @@ import { OrderService } from './order.service';
 import { OrderController } from './order.controller';
 import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Order } from '../typeorm/order.entity';
-import { Cart } from '../typeorm/cart.entity';
-import { Variant } from '../typeorm/variant.entity';
-import { User } from '../typeorm/user.entity';
+import { Order } from './entities/order.entity';
+import { Cart } from '../cart/entities/cart.entity';
+import { Variant } from '../variant/entities/variant.entity';
+import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Order, Cart, Variant, User])],

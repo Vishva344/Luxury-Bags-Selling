@@ -8,7 +8,7 @@ import { RoleGuard } from '../common/guards/role.guard';
 import { Roles } from '../common/decorators/role.decorator';
 import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
-import { User } from '../typeorm/user.entity';
+import { User } from './entities/user.entity';
 
 @Controller('users')
 @UseGuards(RoleGuard)
@@ -31,7 +31,7 @@ export class UsersController {
   }
 
   @Get('AllUser')
-  @Roles(Role.ADMIN)
+  @Roles(Role.BUYER)
   async getAllUser(@RequestUser() user: User): CommonResponsePromise {
     return this.usersService.getAllUser(user);
   }

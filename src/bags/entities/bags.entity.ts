@@ -2,6 +2,7 @@ import { BagCategory, BagType, DataType, Gender } from 'src/bags/types/bags.type
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -9,11 +10,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { User } from './user.entity';
-import { Variant } from './variant.entity';
-import { Favorite } from './favorite.entity';
-import { Cart } from './cart.entity';
-import { Order } from './order.entity';
+import { User } from '../../users/entities/user.entity';
+import { Variant } from '../../variant/entities/variant.entity';
+import { Favorite } from '../../favorite/entities/favorite.entity';
+import { Cart } from '../../cart/entities/cart.entity';
 
 @Entity()
 export class Bag {
@@ -81,4 +81,7 @@ export class Bag {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp' })
+  deletedDate: Date;
 }

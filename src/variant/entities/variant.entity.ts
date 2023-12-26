@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -8,10 +9,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Bag } from './bags.entity';
-import { Favorite } from './favorite.entity';
-import { Cart } from './cart.entity';
-import { Order } from './order.entity';
+import { Bag } from '../../bags/entities/bags.entity';
+import { Favorite } from '../../favorite/entities/favorite.entity';
+import { Cart } from '../../cart/entities/cart.entity';
+import { Order } from '../../order/entities/order.entity';
 
 @Entity()
 export class Variant {
@@ -62,4 +63,7 @@ export class Variant {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp' })
+  deletedDate: Date;
 }

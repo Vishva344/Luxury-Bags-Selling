@@ -6,7 +6,7 @@ import { RequestVerify } from '../common/guards/request-verify.guard';
 
 import { CreateAddToCartDto } from './dtos/create-cart.dto';
 import { RoleGuard } from '../common/guards/role.guard';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('cart')

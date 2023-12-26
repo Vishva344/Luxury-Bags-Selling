@@ -7,9 +7,9 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { User } from './user.entity';
-import { Bag } from './bags.entity';
-import { Variant } from './variant.entity';
+import { Bag } from '../../bags/entities/bags.entity';
+import { User } from '../../users/entities/user.entity';
+import { Variant } from '../../variant/entities/variant.entity';
 
 @Entity()
 export class Favorite {

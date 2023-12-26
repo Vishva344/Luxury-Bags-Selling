@@ -5,10 +5,10 @@ import { CommonResponsePromise } from '../common/types/common.type';
 import { ResponseHandler } from '../common/response-handler';
 import { CreateAddToCartDto } from './dtos/create-cart.dto';
 import { errorMessages } from '../config/messages.config';
-import { Variant } from '../typeorm/variant.entity';
-import { Cart } from '../typeorm/cart.entity';
-import { User } from '../typeorm/user.entity';
-import { Bag } from '../typeorm/bags.entity';
+import { Variant } from '../variant/entities/variant.entity';
+import { Cart } from './entities/cart.entity';
+import { User } from '../users/entities/user.entity';
+import { Bag } from '../bags/entities/bags.entity';
 
 @Injectable()
 export class CartService {

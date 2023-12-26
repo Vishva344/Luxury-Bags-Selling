@@ -1,8 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Cart } from './cart.entity';
-import { User } from './user.entity';
-import { Variant } from './variant.entity';
-import { DeliveryOption } from '../order/order.type';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, DeleteDateColumn } from 'typeorm';
+import { Cart } from '../../cart/entities/cart.entity';
+import { User } from '../../users/entities/user.entity';
+import { Variant } from '../../variant/entities/variant.entity';
+import { DeliveryOption } from '../order.type';
 
 @Entity()
 export class Order {
@@ -27,4 +27,7 @@ export class Order {
     default: DeliveryOption.DELIVERY_BY_SELLER,
   })
   deliveryOption: DeliveryOption;
+
+  @DeleteDateColumn({ type: 'timestamp' })
+  deletedDate: Date;
 }

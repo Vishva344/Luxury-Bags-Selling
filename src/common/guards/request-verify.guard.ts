@@ -6,7 +6,7 @@ import { JwtPayload } from '../types/jwt-payload.type';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { errorMessages } from '../../config/messages.config';
-import { User } from '../../typeorm/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 /**
  * Description - Request Verify Guard

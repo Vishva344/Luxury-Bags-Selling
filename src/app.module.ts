@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { getEnvFile } from './config/env.config';
 import { ConfigModule } from '@nestjs/config';
 import { SeedsService } from './seeds/seed.service';
-import { User } from './typeorm/user.entity';
+import { User } from './users/entities/user.entity';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';

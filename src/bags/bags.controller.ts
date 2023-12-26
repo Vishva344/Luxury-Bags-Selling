@@ -7,7 +7,7 @@ import { RequestUser } from '../common/decorators/request-user.decorator';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateBagDto } from './dtos/update-bag.dto';
 import { GetAllBagDto } from './dtos/get-bag.dto';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @UseGuards(RequestVerify)
 @Controller('bags')
@@ -15,7 +15,7 @@ export class BagsController {
   constructor(private readonly bagsService: BagsService) {}
 
   @Post()
-  async createBag(@RequestUser() user: User, @Body() createBagDto: CreateBagDto): BagTable {
+  async createBag(@RequestUser() user: User, @Body() createBagDto: CreateBagDto): CommonResponsePromise {
     return this.bagsService.createBag(user, createBagDto);
   }
 

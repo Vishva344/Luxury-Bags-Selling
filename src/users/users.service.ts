@@ -7,7 +7,7 @@ import { UpdateData, UsersTable } from './users.type';
 import { ResponseHandler } from 'src/common/response-handler';
 import { CommonResponsePromise } from '../common/types/common.type';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { User } from '../typeorm/user.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {

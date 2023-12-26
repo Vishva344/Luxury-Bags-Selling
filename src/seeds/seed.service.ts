@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { Defaults } from '../config/default.config';
 import { Role } from '../common/types/common.type';
 import { hash } from 'bcrypt';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 // import { Admin, AdminDocument } from '../admin/schemas/admin.schema';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class SeedsService {
       email: Defaults.SUPER_ADMIN_EMAIL,
       phoneNumber: '1234567890',
       password: await hash(Defaults.SUPER_ADMIN_PASSWORD, 10),
-      role: Role.ADMIN,
+      role: Role.BUYER,
       IsDeactivate: false,
     };
 

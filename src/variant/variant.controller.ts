@@ -22,7 +22,7 @@ import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RoleGuard } from '../common/guards/role.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
 import { GetAllVariantDto } from './dtos/get-variant.dto';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('variant')

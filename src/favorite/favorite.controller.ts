@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Param, Post, UseGuards } from '@nestjs/common
 import { FavoriteService } from './favorite.service';
 import { CreateFavoriteDto } from './dtos/create-favorite.dto';
 import { RequestUser } from '../common/decorators/request-user.decorator';
-import { User } from '../typeorm/user.entity';
+import { User } from '../users/entities/user.entity';
 import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RoleGuard } from '../common/guards/role.guard';
 import { CommonResponsePromise } from '../common/types/common.type';

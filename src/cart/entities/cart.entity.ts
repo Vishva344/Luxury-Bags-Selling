@@ -9,10 +9,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Bag } from './bags.entity';
-import { User } from './user.entity';
-import { Variant } from './variant.entity';
-import { Order } from './order.entity';
+import { Bag } from '../../bags/entities/bags.entity';
+import { User } from '../../users/entities/user.entity';
+import { Variant } from '../../variant/entities/variant.entity';
+import { Order } from '../../order/entities/order.entity';
 
 @Entity()
 export class Cart {

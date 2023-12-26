@@ -4,16 +4,14 @@ import { CommonResponse } from './common-response.type';
  * @ignore
  */
 export enum Role {
-  ADMIN = 'admin',
   SELLER = 'seller',
   BUYER = 'buyer',
-  USER = 'user',
 }
 
-export enum User {
-  SELLER = 'seller',
-  BUYER = 'buyer',
-}
+// export enum User {
+//   SELLER = 'seller',
+//   BUYER = 'buyer',
+// }
 
 export enum SortBy {
   ASE = 'asc',

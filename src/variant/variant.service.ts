@@ -10,9 +10,9 @@ import { UpdateVariantDto } from './dtos/update-variant.dto';
 import { errorMessages } from '../config/messages.config';
 import { GetAllVariantDto } from './dtos/get-variant.dto';
 import { Defaults } from '../config/default.config';
-import { User } from '../typeorm/user.entity';
-import { Variant } from '../typeorm/variant.entity';
-import { Bag } from '../typeorm/bags.entity';
+import { User } from '../users/entities/user.entity';
+import { Variant } from './entities/variant.entity';
+import { Bag } from '../bags/entities/bags.entity';
 
 @Injectable()
 export class VariantService {

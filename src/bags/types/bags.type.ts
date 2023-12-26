@@ -1,5 +1,5 @@
 import { CommonResponse } from '../../common/types/common-response.type';
-import { Bag } from '../../typeorm/bags.entity';
+import { Bag } from '../entities/bags.entity';
 
 export enum BagType {
   TOTE = 'Tote',
