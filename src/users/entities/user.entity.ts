@@ -13,6 +13,7 @@ import { Cart } from '../../cart/entities/cart.entity';
 
 import { Order } from '../../order/entities/order.entity';
 import { Favorite } from '../../favorite/entities/favorite.entity';
+import { Bid } from '../../bid/entities/bid.entity';
 
 @Entity()
 export class User {
@@ -22,7 +23,7 @@ export class User {
   @Column({ length: 40 })
   name: string;
 
-  @Column({ length: 40 })
+  @Column({ type: 'varchar', length: 40, unique: true })
   email: string;
 
   @Column()
@@ -42,6 +43,9 @@ export class User {
 
   @OneToMany(() => Bag, (bag) => bag.user)
   bags: Bag[];
+
+  @OneToMany(() => Bid, (bid) => bid.user)
+  bids: Bid[];
 
   @OneToMany(() => Favorite, (favorite) => favorite.user)
   favorites: Favorite[];

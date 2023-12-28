@@ -9,5 +9,4 @@ export class UpdateBagDto extends PickType(CreateBagDto, [
   'bag_type',
   'brandName',
   'gender',
-  'offers',
 ] as const) {}

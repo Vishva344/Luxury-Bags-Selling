@@ -30,7 +30,7 @@ export class BagsService {
       bag_type: createBagDto.bag_type,
       bag_category: createBagDto.bag_category,
       gender: createBagDto.gender,
-      offers: createBagDto.offers ?? [],
+      // offers: createBagDto.offers ?? [],
       bag_size: createBagDto.bag_size,
     };
     await this.bagRepository.save(bag);
@@ -51,7 +51,7 @@ export class BagsService {
       bag_type: updateBagDto.bag_type,
       bag_category: updateBagDto.bag_category,
       gender: updateBagDto.gender,
-      offers: updateBagDto.offers ?? [],
+      // offers: updateBagDto.offers ?? [],
       bag_size: updateBagDto.bag_size,
     };
 

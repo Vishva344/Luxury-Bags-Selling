@@ -25,7 +25,9 @@ export class RoleGuard implements CanActivate {
     if (!requiredRoles) return true;
 
     const request = context.switchToHttp().getRequest<RequestWithPayload>();
+    console.log('🚀 ~ file: role.guard.ts:28 ~ RoleGuard ~ canActivate ~ request:', request);
     const user = request.user;
+    console.log('🚀 ~ file: role.guard.ts:29 ~ RoleGuard ~ canActivate ~ user:', user);
     if (!requiredRoles.includes(user.role)) throw new UnauthorizedException(errorMessages.PERMISSION_DENIED);
 
     return true;

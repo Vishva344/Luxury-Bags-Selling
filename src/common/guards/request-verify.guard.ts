@@ -37,7 +37,10 @@ export class RequestVerify implements CanActivate {
     const payload: JwtPayload = await this.jwtService.verifyAsync(userToken, {
       secret: this.configService.get<string>('SECRET_KEY'),
     });
-    console.log('🚀 ~ file: request-verify.guard.ts:39 ~ RequestVerify ~ canActivate ~ payload:', payload.role);
+    console.log(
+      '🚀 ~ file: request-verify.guard.ts:39 ~ RequestVerify ~ canActivate ~ payload:++++++++++++++++',
+      payload.role,
+    );
     if (!payload) throw new UnauthorizedException('unAuthorized');
 
     const user = await this.userRepository.findOne({ where: { id: payload.id, email: payload.email } });

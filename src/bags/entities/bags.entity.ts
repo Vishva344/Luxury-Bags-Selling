@@ -1,4 +1,4 @@
-import { BagCategory, BagType, DataType, Gender } from 'src/bags/types/bags.type';
+import { BagCategory, BagType, Gender } from 'src/bags/types/bags.type';
 import {
   Column,
   CreateDateColumn,
@@ -14,6 +14,9 @@ import { User } from '../../users/entities/user.entity';
 import { Variant } from '../../variant/entities/variant.entity';
 import { Favorite } from '../../favorite/entities/favorite.entity';
 import { Cart } from '../../cart/entities/cart.entity';
+import { Offer } from '../../offer/entities/offers.entity';
+import { Photo } from '../../image/entities/image.entity';
+import { Bid } from '../../bid/entities/bid.entity';
 
 @Entity()
 export class Bag {
@@ -54,8 +57,17 @@ export class Bag {
   })
   gender: Gender;
 
-  @Column({ type: 'json', nullable: true })
-  offers: DataType[];
+  @OneToMany(() => Bid, (bid) => bid.bag)
+  bids: Bid[];
+
+  @OneToMany(() => Offer, (offer) => offer.bag)
+  offers: Offer[];
+
+  @OneToMany(() => Photo, (photo) => photo.bag)
+  photos: Photo[];
+
+  // @Column({ type: 'json', nullable: true })
+  // offers: DataType[];
 
   @Column({ type: 'varchar', length: 40, nullable: true })
   bag_size: string;

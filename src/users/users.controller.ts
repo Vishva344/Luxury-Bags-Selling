@@ -21,6 +21,7 @@ export class UsersController {
   }
 
   @UseGuards(RequestVerify)
+  @Roles(Role.BUYER, Role.SELLER)
   @Post(':id')
   async updateUser(
     @RequestUser() user: User,
@@ -31,12 +32,13 @@ export class UsersController {
   }
 
   @Get('AllUser')
-  @Roles(Role.BUYER)
+  @Roles(Role.SELLER)
   async getAllUser(@RequestUser() user: User): CommonResponsePromise {
     return this.usersService.getAllUser(user);
   }
 
   @Get(':id')
+  @Roles(Role.BUYER, Role.SELLER)
   async getUser(@RequestUser() user: User, @Param('id') id: number): CommonResponsePromise {
     return this.usersService.getUser(user, id);
   }

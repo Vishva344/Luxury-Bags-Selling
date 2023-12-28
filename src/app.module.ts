@@ -12,6 +12,9 @@ import { User } from './users/entities/user.entity';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
+import { OfferModule } from './offer/offer.module';
+import { ImageModule } from './image/image.module';
+import { BidModule } from './bid/bid.module';
 
 @Module({
   imports: [
@@ -39,6 +42,9 @@ import { OrderModule } from './order/order.module';
     FavoriteModule,
     CartModule,
     OrderModule,
+    OfferModule,
+    ImageModule,
+    BidModule,
   ],
   controllers: [],
   providers: [SeedsService],
