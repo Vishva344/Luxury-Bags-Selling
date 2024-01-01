@@ -28,8 +28,11 @@ export class Bid {
   bid: number;
 
   @ManyToOne(() => User, (user) => user.bids)
-  @JoinColumn({ name: 'userId' })
+  @JoinColumn({ name: 'buyerId' })
   user: User;
+
+  @Column()
+  sellerId: string;
 
   @ManyToOne(() => Bag, (bag) => bag.bids)
   @JoinColumn({ name: 'bagId' })

@@ -3,3 +3,8 @@ export enum BidStatus {
   INACTIVE = 'Inactive',
   BOTH = 'Both',
 }
+
+export enum SortFields {
+  BAGNAME = 'bagName',
+  NAME = 'name',
+}

@@ -30,7 +30,6 @@ export class AuthService {
       p: loginDto.password,
       role: admin.role,
     };
-    console.log('🚀 ~ file: auth.service.ts:33 ~ AuthService ~ login ~ payload:', payload);
 
     return ResponseHandler.success(
       {

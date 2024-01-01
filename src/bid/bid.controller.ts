@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { BidService } from './bid.service';
 import { CreateBidDto } from './dtos/create-bid.dto';
 import { Roles } from '../common/decorators/role.decorator';
@@ -8,6 +8,7 @@ import { RequestVerify } from '../common/guards/request-verify.guard';
 import { RequestUser } from '../common/decorators/request-user.decorator';
 import { User } from '../users/entities/user.entity';
 import { UpdateBidDto } from './dtos/update-bid.dto';
+import { GetAllBidDto } from './dtos/get-AllBid.dto';
 
 @UseGuards(RequestVerify, RoleGuard)
 @Controller('bid')
@@ -16,8 +17,8 @@ export class BidController {
 
   @Post()
   @Roles(Role.BUYER)
-  async createBid(@RequestUser() user: User, @Body() createBidDto: CreateBidDto): CommonResponsePromise {
-    return this.bidService.createBid(user, createBidDto);
+  async createBid(@Body() createBidDto: CreateBidDto): CommonResponsePromise {
+    return this.bidService.createBid(createBidDto);
   }
 
   @Post(':bidId')
@@ -34,5 +35,15 @@ export class BidController {
   @Roles(Role.BUYER, Role.SELLER)
   async getBid(@RequestUser() user: User, @Param('id') bidId: number): CommonResponsePromise {
     return this.bidService.getBid(user, bidId);
+  }
+
+  @Get('AllBid/:id')
+  async getAllBid(@Param('id') userId: number, @Query() query: GetAllBidDto): CommonResponsePromise {
+    return this.bidService.getAllBid(userId, query);
+  }
+
+  @Get('bids/:id')
+  async getSellerBid(@Param('id') bagId: number, @Query() query: GetAllBidDto): CommonResponsePromise {
+    return this.bidService.getSellerBid(bagId, query);
   }
 }

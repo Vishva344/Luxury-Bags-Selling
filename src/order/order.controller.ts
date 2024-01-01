@@ -25,8 +25,6 @@ export class OrderController {
 
   @Get()
   async getAllOrder(@Query() query: GetAllOrderDto): CommonResponsePromise {
-    console.log(query, '*************************');
-
     return this.orderService.getAllOrder(query);
   }
 }

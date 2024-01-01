@@ -7,7 +7,11 @@ export class CreateBidDto {
 
   @IsNumber()
   @IsNotEmpty()
-  userId: number;
+  buyerId: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  sellerId: number;
 
   @IsNumber()
   @IsNotEmpty()

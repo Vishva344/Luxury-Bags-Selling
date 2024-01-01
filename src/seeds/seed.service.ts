@@ -15,7 +15,6 @@ export class SeedsService {
 
   async seedAdmin(): Promise<string> {
     const existingUsers = await this.userRepository.find();
-    // console.log('🚀 ~ file: seed.service.ts:21 ~ SeedsService ~ seedAdmin ~ existingUsers:', existingUsers);
 
     const adminSeed = {
       name: 'Admin',
