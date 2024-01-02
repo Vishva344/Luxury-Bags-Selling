@@ -17,8 +17,8 @@ export class BidController {
 
   @Post()
   @Roles(Role.BUYER)
-  async createBid(@Body() createBidDto: CreateBidDto): CommonResponsePromise {
-    return this.bidService.createBid(createBidDto);
+  async createBid(@RequestUser() user: User, @Body() createBidDto: CreateBidDto): CommonResponsePromise {
+    return this.bidService.createBid(user, createBidDto);
   }
 
   @Post(':bidId')

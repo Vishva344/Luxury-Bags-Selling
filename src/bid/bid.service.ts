@@ -19,26 +19,31 @@ export class BidService {
     @InjectRepository(Bid) private readonly bidRepository: Repository<Bid>,
   ) {}
 
-  async createBid(createBidDto: CreateBidDto): CommonResponsePromise {
+  async createBid(user: User, createBidDto: CreateBidDto): CommonResponsePromise {
     const bag = await this.bagRepository.findOne({ where: { id: createBidDto.bagId } });
-
-    // const bag = await getRepository(Bag)
-    //   .createQueryBuilder('bag')
-    //   .where('bag.id = :id', { id: createBidDto.bagId })
-    //   .orderBy('bag.id', 'ASC')
-    //   .getOne();
-    // console.log('🚀 ~ file: bid.service.ts:24 ~ BidService ~ createBid ~ bag:', bag);
-
     if (!bag) throw new NotFoundException('bag is not found');
 
-    const user = await this.userRepository.findOne({ where: { id: createBidDto.buyerId } });
-    if (!user) throw new NotFoundException('user is not found');
+    // const bagSeller = this.userRepository
+    //   .createQueryBuilder('user')
+    //   .innerJoin('bag', 'bag', 'bag.userId = user.id')
+    //   .where('bag.id = :bagId', { id: createBidDto.bagId })
+    //   .select('user.id');
+
+    const usersWithBagId = await this.userRepository
+      .createQueryBuilder('user')
+      .innerJoin('user.bags', 'bag')
+      .where('bag.id = :bagId', { bagId: createBidDto.bagId })
+      .select('user.id')
+      .getOne();
+
+    if (!usersWithBagId) throw new NotFoundException('userid is not found');
+
     const bidData = {
       user: user,
       bag: bag,
-      // sellerId: bag,
+      sellerId: usersWithBagId.id,
       bidStatus: createBidDto.bidStatus,
-      bid: createBidDto.bid,
+      value: createBidDto.value,
     };
     const bid = await this.bidRepository.save(bidData);
     return ResponseHandler.success(bid, 'bid created successfully.', HttpStatus.OK);
@@ -47,7 +52,7 @@ export class BidService {
   async updateBid(user: User, bidId: number, updateBidDto: UpdateBidDto): CommonResponsePromise {
     const bid = await this.bidRepository.findOne({ where: { id: bidId } });
     if (!bid) throw new NotFoundException('bid is not found');
-    const updateBid = await this.bidRepository.update({ id: bidId }, { bid: updateBidDto.bid });
+    const updateBid = await this.bidRepository.update({ id: bidId }, { value: updateBidDto.value });
     return ResponseHandler.success(updateBid, '', HttpStatus.OK);
   }
 

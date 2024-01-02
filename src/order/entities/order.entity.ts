@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, DeleteDateColumn, Int32 } from 'typeorm';
 import { Cart } from '../../cart/entities/cart.entity';
 import { User } from '../../users/entities/user.entity';
 import { Variant } from '../../variant/entities/variant.entity';
 import { DeliveryOption } from '../order.type';
+import { Bid } from '../../bid/entities/bid.entity';
 
 @Entity()
 export class Order {
@@ -13,13 +14,22 @@ export class Order {
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ManyToOne(() => Variant, (variant) => variant.orders)
-  @JoinColumn({ name: 'variantId' })
-  variant: Variant;
+  @Column()
+  sellerId: number;
 
-  @ManyToOne(() => Cart, (cart) => cart.orders)
-  @JoinColumn({ name: 'cartId' })
-  cart: Cart;
+  @Column()
+  price: number;
+
+  // @ManyToOne(() => Variant, (variant) => variant.orders)
+  // @JoinColumn({ name: 'variantId' })
+  // variant: Variant;
+
+  // @ManyToOne(() => Cart, (cart) => cart.orders)
+  // @JoinColumn({ name: 'cartId' })
+  // cart: Cart;
+  @ManyToOne(() => Bid, (bid) => bid.orders)
+  @JoinColumn({ name: 'bidId' })
+  bid: Bid;
 
   @Column({
     type: 'enum',

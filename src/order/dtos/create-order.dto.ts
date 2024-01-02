@@ -4,15 +4,22 @@ import { DeliveryOption } from '../order.type';
 export class CreateOrderDto {
   @IsNumber()
   @IsNotEmpty()
-  variantId: number;
+  bidId: number;
 
   @IsNumber()
   @IsNotEmpty()
   userId: number;
 
   @IsNumber()
+  price: number;
+
+  @IsNumber()
   @IsNotEmpty()
-  cartId: number;
+  sellerId: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  bagId: number;
 
   @IsString()
   @IsOptional()

@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString, isEnum } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Role } from '../../common/types/common.type';
 
 export class CreateUserDto {
@@ -25,4 +25,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   IsDeactivate: boolean;
+
+  @IsString()
+  @IsNotEmpty()
+  location: string;
 }

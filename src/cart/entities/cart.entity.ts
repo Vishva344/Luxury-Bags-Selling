@@ -31,8 +31,8 @@ export class Cart {
   @JoinColumn({ name: 'variantId' })
   variant: Variant;
 
-  @OneToMany(() => Order, (order) => order.cart)
-  orders: Order[];
+  // @OneToMany(() => Order, (order) => order.cart)
+  // orders: Order[];
 
   @Column({ nullable: false })
   price: number;

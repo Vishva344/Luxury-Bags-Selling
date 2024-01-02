@@ -34,6 +34,7 @@ export class UsersService {
       name: updateUserDto.name,
       email: updateUserDto.email,
       phoneNumber: updateUserDto.phoneNumber,
+      location: updateUserDto.location,
     };
 
     await this.userRepository.update(id, updateData);

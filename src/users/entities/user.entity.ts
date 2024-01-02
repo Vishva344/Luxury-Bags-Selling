@@ -38,6 +38,9 @@ export class User {
   @Column({ length: 10 })
   phoneNumber: string;
 
+  @Column({ length: 40 })
+  location: string;
+
   @Column()
   IsDeactivate: boolean;
 

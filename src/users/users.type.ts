@@ -10,12 +10,14 @@ export interface UserDetailResponseData {
   phoneNumber: string;
   IsDeactivate: boolean;
   role: string;
+  location: string;
 }
 
 export interface UpdateData {
   name?: string;
   email?: string;
   phoneNumber?: string;
+  location?: string;
 }
 
 export enum SortFields {

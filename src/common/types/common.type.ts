@@ -6,6 +6,7 @@ import { CommonResponse } from './common-response.type';
 export enum Role {
   SELLER = 'seller',
   BUYER = 'buyer',
+  ADMIN = 'admin',
 }
 
 // export enum User {

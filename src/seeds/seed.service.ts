@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Injectable } from '@nestjs/common';
 // import bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,8 +20,9 @@ export class SeedsService {
       email: Defaults.SUPER_ADMIN_EMAIL,
       phoneNumber: '1234567890',
       password: await hash(Defaults.SUPER_ADMIN_PASSWORD, 10),
-      role: Role.BUYER,
+      role: Role.ADMIN,
       IsDeactivate: false,
+      location: 'Ahmadabad',
     };
 
     if (existingUsers.length === 0) {

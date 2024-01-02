@@ -51,8 +51,8 @@ export class Variant {
   @OneToMany(() => Cart, (cart) => cart.variant)
   carts: Cart[];
 
-  @OneToMany(() => Order, (order) => order.variant)
-  orders: Order[];
+  // @OneToMany(() => Order, (order) => order.variant)
+  // orders: Order[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

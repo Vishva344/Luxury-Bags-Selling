@@ -5,11 +5,12 @@ import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Cart } from '../cart/entities/cart.entity';
-import { Variant } from '../variant/entities/variant.entity';
 import { User } from '../users/entities/user.entity';
+import { Bid } from '../bid/entities/bid.entity';
+import { Bag } from '../bags/entities/bags.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, Cart, Variant, User])],
+  imports: [TypeOrmModule.forFeature([Order, Cart, Bag, User, Bid])],
   controllers: [OrderController],
   providers: [OrderService, JwtService],
 })
