@@ -1,5 +1,5 @@
 export enum BidStatus {
-  ACTIVE = 'Active',
+  ACTIVE = 'active',
   INACTIVE = 'Inactive',
   BOTH = 'Both',
 }

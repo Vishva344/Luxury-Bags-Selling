@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { BidStatus } from '../bid.types';
 
 export class CreateBidDto {
@@ -20,4 +20,8 @@ export class CreateBidDto {
   @IsNumber()
   @IsNotEmpty()
   bagId: number;
+
+  @IsString()
+  @IsNotEmpty()
+  IsAccept: boolean;
 }

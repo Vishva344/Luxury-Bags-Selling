@@ -46,4 +46,9 @@ export class BidController {
   async getSellerBid(@Param('id') bagId: number, @Query() query: GetAllBidDto): CommonResponsePromise {
     return this.bidService.getSellerBid(bagId, query);
   }
+
+  @Post('status/:id')
+  async updateBidStatus(@Param('bidId') bidId: number, updateBidDto: UpdateBidDto): CommonResponsePromise {
+    return this.bidService.updateBidStatus(bidId, updateBidDto);
+  }
 }

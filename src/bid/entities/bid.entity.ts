@@ -29,6 +29,9 @@ export class Bid {
   @Column()
   value: number;
 
+  @Column({ default: false })
+  IsAccept: boolean;
+
   @ManyToOne(() => User, (user) => user.bids)
   @JoinColumn({ name: 'buyerId' })
   user: User;

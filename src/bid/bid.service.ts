@@ -120,4 +120,11 @@ export class BidService {
 
     return ResponseHandler.success({ result, totalPages }, 'Bids retrieved successfully', HttpStatus.OK);
   }
+
+  async updateBidStatus(bidId: number, updateBidDto: UpdateBidDto): CommonResponsePromise {
+    const bid = await this.bidRepository.findOne({ where: { id: bidId } });
+    if (!bid) throw new NotFoundException('bid is not found');
+    const updateBid = await this.bidRepository.update({ id: bidId }, { IsAccept: updateBidDto.IsAccept });
+    return ResponseHandler.success(updateBid, '', HttpStatus.OK);
+  }
 }
